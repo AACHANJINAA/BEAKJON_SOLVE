@@ -3,34 +3,34 @@
 using namespace std;
 
 int main() {
-    int a[9];  // 9명의 난쟁이 키를 저장할 배열
-    int sum = 0;  // 9명의 난쟁이 키의 합
+    int size = 0;
+    cin >> size;  // 배열의 행 크기 입력
 
-    // 9명의 난쟁이 키 입력
-    for (int i = 0; i < 9; i++) {
-        cin >> a[i];
-        sum += a[i];  // 전체 키의 합 계산
-    }
+    // 동적으로 2차원 배열 할당 (크기: size x 10)
+    int** arr = new int* [size];  // 첫 번째 차원의 크기를 입력받은 size로 설정
+    int i, j;
 
-    // 2명을 제외한 합이 100이 되는지 확인하는 이중 루프
-    for (int i = 0; i < 8; i++) {
-        for (int j = i + 1; j < 9; j++) {
-            // 두 명을 제외한 나머지 7명의 합이 100인 경우
-            if (sum - a[i] - a[j] == 100) {
-                a[i] = a[j] = -1;  // 제외할 난쟁이들을 -1로 표시
-                break;
-            }
-        }
-        if (a[i] == -1) break;  // 두 명을 제외한 경우 루프 종료
-    }
+    // 각 행에 10개의 열을 가지는 배열 할당
+    for (i = 0; i < size; i++)
+        arr[i] = new int[10];  // 각 행은 10개의 열을 가짐
 
-    // 나머지 7명의 난쟁이 키를 오름차순으로 정렬
-    sort(a, a + 9);
+    // 배열에 값 입력 (크기: size x 10)
+    for (i = 0; i < size; i++)
+        for (j = 0; j < 10; j++)
+            cin >> arr[i][j];  // 각 요소에 값을 입력
 
-    // -1이 아닌 값들만 출력 (즉, 나머지 7명의 난쟁이 키)
-    for (int i = 2; i < 9; i++) {
-        cout << a[i] << endl;
-    }
+    // 각 행을 오름차순으로 정렬
+    for (i = 0; i < size; i++)
+        sort(arr[i], arr[i] + 10);  // 각 행의 값을 정렬
+
+    // 각 행의 7번째 값을 출력 (0-based 인덱스이므로 arr[i][7]은 8번째 값)
+    for (i = 0; i < size; i++)
+        cout << arr[i][7] << endl;  // 각 행의 7번째 값을 출력
+
+    // 동적 배열 메모리 해제 (각 행에 할당된 메모리 해제)
+    for (i = 0; i < size; i++)
+        delete[] arr[i];  // 각 행의 메모리 해제
+    delete[] arr;  // 첫 번째 차원의 메모리 해제
 
     return 0;
 }
