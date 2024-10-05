@@ -2,52 +2,34 @@
 #include <algorithm>
 using namespace std;
 
+// 피보나치 수열을 계산하고 결과를 출력하는 함수
+void Fibonacci(int n);
+
 int main() {
-    int size; // 테스트 케이스의 개수
-    cin >> size; // 테스트 케이스 수 입력
+    int fibo_num;
+    cin >> fibo_num; // 피보나치 수열에서 몇 번째 값을 계산할지 입력
 
-    int i, j; // 반복문용 변수
-    // 2차원 배열 동적 할당: size개의 배열을 가짐, 각 배열은 7개의 정수를 담음
-    int** t = new int* [size] {};
-    // 각 테스트 케이스마다 짝수들의 합을 저장할 배열
-    int* sum = new int[size] {};
-    // 각 테스트 케이스마다 최소 짝수를 저장할 배열
-    int* smallest_num = new int[size];
-
-    // 각 테스트 케이스별로 7개의 정수를 저장할 배열 동적 할당
-    for (i = 0; i < size; i++)
-        t[i] = new int[7] {};
-
-    // 각 테스트 케이스 입력받기
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < 7; j++) {
-            cin >> t[i][j]; // 각 테스트 케이스의 7개의 정수를 입력받음
-        }
-        sort(t[i], t[i] + 7, less<>()); // 입력받은 7개의 정수를 오름차순으로 정렬
-        smallest_num[i] = 100; // 최소 짝수를 100으로 초기화 (최대값으로 설정)
-    }
-
-    // 각 테스트 케이스에 대해 짝수를 찾고 합산하며, 최소 짝수 찾기
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < 7; j++) {
-            if (t[i][j] % 2 == 0) { // 짝수인 경우
-                if (smallest_num[i] == 100) // 아직 최소 짝수를 찾지 못했으면
-                    smallest_num[i] = t[i][j]; // 첫 번째 짝수를 최소값으로 설정
-                sum[i] += t[i][j]; // 짝수들의 합을 저장
-            }
-        }
-    }
-
-    // 결과 출력: 각 테스트 케이스마다 짝수들의 합과 최소 짝수 출력
-    for (i = 0; i < size; i++)
-        cout << sum[i] << ' ' << smallest_num[i] << endl;
-
-    // 동적 할당된 메모리 해제
-    for (i = 0; i < size; i++)
-        delete[] t[i]; // 각 테스트 케이스에 해당하는 배열을 해제
-    delete[] t; // 2차원 배열 해제
-    delete[] sum; // 합계를 저장한 배열 해제
-    delete[] smallest_num; // 최소 짝수를 저장한 배열 해제
+    Fibonacci(fibo_num); // 입력한 값에 해당하는 피보나치 수 계산 및 출력
 
     return 0;
+}
+
+void Fibonacci(int n) {
+    int n1 = 0, n2 = 1; // 첫 번째와 두 번째 피보나치 수(0과 1) 초기화
+    // 입력된 n 값에 따라 피보나치 수열 계산
+    for (int i = 0; i < n; i++) {
+        if (i % 2 == 0) { // 짝수 번째일 때는 n1에 값 갱신
+            n1 = n1 + n2; // n1에 n1 + n2 값을 더해 갱신
+        }
+        else if (i % 2 == 1) { // 홀수 번째일 때는 n2에 값 갱신
+            n2 = n1 + n2; // n2에 n1 + n2 값을 더해 갱신
+        }
+    }
+
+    // 마지막으로 계산된 값이 짝수 번째에 해당하면 n1 출력
+    if (n % 2 == 0)
+        cout << n1 << endl;
+    // 마지막으로 계산된 값이 홀수 번째에 해당하면 n2 출력
+    else if (n % 2 == 1)
+        cout << n2 << endl;
 }
