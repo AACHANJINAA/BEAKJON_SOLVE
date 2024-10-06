@@ -2,34 +2,31 @@
 #include <algorithm>
 using namespace std;
 
-// 피보나치 수열을 계산하고 결과를 출력하는 함수
-void Fibonacci(int n);
-
 int main() {
-    int fibo_num;
-    cin >> fibo_num; // 피보나치 수열에서 몇 번째 값을 계산할지 입력
+    int kind_of_coin, price_sum; // 동전 종류의 개수와 목표 금액을 저장할 변수
+    cin >> kind_of_coin; // 동전 종류 입력
+    int* coin_num = new int[kind_of_coin]; // 동전 종류만큼 배열 동적 할당
+    cin >> price_sum; // 목표 금액 입력
 
-    Fibonacci(fibo_num); // 입력한 값에 해당하는 피보나치 수 계산 및 출력
+    // 각 동전의 가치를 입력받음
+    for (int i = 0; i < kind_of_coin; i++)
+        cin >> coin_num[i];
 
-    return 0;
-}
+    int idx = kind_of_coin - 1, cnt = 0; // 가장 큰 동전부터 사용할 것이므로 인덱스를 마지막으로 설정, 동전 개수를 셀 cnt 초기화
 
-void Fibonacci(int n) {
-    int n1 = 0, n2 = 1; // 첫 번째와 두 번째 피보나치 수(0과 1) 초기화
-    // 입력된 n 값에 따라 피보나치 수열 계산
-    for (int i = 0; i < n; i++) {
-        if (i % 2 == 0) { // 짝수 번째일 때는 n1에 값 갱신
-            n1 = n1 + n2; // n1에 n1 + n2 값을 더해 갱신
+    // 동전으로 금액을 만들기 위한 루프
+    while (idx > -1) { // 동전의 종류가 남아 있는 동안 반복
+        if (price_sum - coin_num[idx] > -1) { // 현재 동전을 사용할 수 있는지 확인 (price_sum에서 동전을 뺄 수 있는지 확인)
+            price_sum -= coin_num[idx]; // 해당 동전을 사용하고 금액에서 동전의 값을 뺌
+            cnt++; // 사용한 동전 개수를 증가
         }
-        else if (i % 2 == 1) { // 홀수 번째일 때는 n2에 값 갱신
-            n2 = n1 + n2; // n2에 n1 + n2 값을 더해 갱신
+        else {
+            idx--; // 현재 동전을 사용할 수 없다면, 다음 작은 동전으로 이동
         }
     }
 
-    // 마지막으로 계산된 값이 짝수 번째에 해당하면 n1 출력
-    if (n % 2 == 0)
-        cout << n1 << endl;
-    // 마지막으로 계산된 값이 홀수 번째에 해당하면 n2 출력
-    else if (n % 2 == 1)
-        cout << n2 << endl;
+    // 최소 동전 개수 출력
+    cout << cnt << endl;
+
+    return 0;
 }
