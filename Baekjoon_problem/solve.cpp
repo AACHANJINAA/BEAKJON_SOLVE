@@ -1,19 +1,25 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    string s;
-    cin >> s; // 입력받은 문자열
+int reverse_int(int r) {
+    int result = 0;
 
-    cout << s[0]; // 첫 번째 글자는 바로 출력 (약어의 첫 글자)
-
-    // 두 번째 글자부터 끝까지 반복하면서 '-' 다음 글자 출력
-    for (int i = 1; i < s.length(); i++) {
-        if (s[i - 1] == '-') { // 이전 문자가 '-'이면 현재 문자가 약어의 첫 글자
-            cout << s[i];
-        }
+    // 입력 숫자의 자릿수를 뒤집는 과정
+    while (r > 0) {
+        result = result * 10 + r % 10; // 가장 마지막 자릿수를 result에 추가
+        r /= 10; // 마지막 자릿수를 제거
     }
+    return result;
+}
 
-    cout << endl; // 결과 출력 후 줄 바꿈
+int main() {
+    int n1, n2, rst;
+    
+    cin >> n1 >> n2;
+
+    rst = reverse_int(n1) + reverse_int(n2);
+
+    cout << reverse_int(rst) << endl;
+
     return 0;
 }
