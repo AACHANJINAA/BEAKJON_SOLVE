@@ -1,19 +1,24 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
 	string s;
 	cin >> s;
-	int cnt = 0;
+	int n = s.length() / 10 + 1, i;
+	string* a = new string[n];
 
-	for (int i = 0; i < s.length(); i++) {
-		if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i'
-			|| s[i] == 'o' || s[i] == 'u') {
-			cnt++;
-		}
+	for (i = 0; i < n; i++) {
+		if (i != n - 1)
+			a[i] = s.substr(i * 10, 10);
+		else
+			a[i] = s.substr(i * 10);
 	}
 
-	cout << cnt << endl;
+	for (i = 0; i < n; i++)
+		cout << a[i] << endl;
+
+	delete[] a;
 
 	return 0;
 }
