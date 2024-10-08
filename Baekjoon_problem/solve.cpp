@@ -1,46 +1,40 @@
 #include <iostream>
-#include <climits>  // INT_MIN 사용을 위해 추가
+#include <string>
 using namespace std;
 
 int main() {
-    string s;
-    cin >> s;  // 문자열 입력
+    int size;
+    cin >> size;  // 테스트 케이스 수 입력
 
-    int i, alphabet[26] = {};  // 알파벳 빈도수를 저장할 배열, 초기값 0으로 설정
-    int max = INT_MIN, max_pos = 0;  // 최대 빈도수를 저장할 변수, INT_MIN으로 초기화
-    char result;  // 최종 결과를 저장할 문자
+    // 각 테스트 케이스에서 사용할 두 개의 문자열을 저장할 배열 동적 할당
+    string* str1 = new string[size];
+    string* str2 = new string[size];
 
-    // 입력된 문자열을 모두 대문자로 변환 (소문자를 대문자로 통일)
-    for (i = 0; i < s.length(); i++) {
-        if (s[i] - 'a' < 0)  // 소문자인 경우 (소문자의 아스키 코드가 더 큼)
-            s[i] += 'a' - 'A';  // 소문자에서 대문자로 변환
-    }
+    // 두 문자열 입력 처리
+    for (int i = 0; i < size; i++)
+        cin >> str1[i] >> str2[i];  // 각 테스트 케이스의 두 문자열 입력 받음
 
-    // 각 문자의 빈도수를 계산하여 배열에 저장 (알파벳 'a' ~ 'z'까지 처리)
-    for (i = 0; i < s.length(); i++) {
-        alphabet[s[i] - 'a']++;  // 'a'의 아스키 값을 기준으로 인덱스에 빈도수 추가
-    }
+    // 거리 계산 및 출력
+    for (int i = 0; i < size; i++) {
+        cout << "Distances: ";  // 수정된 출력 형식 (문제에서 요구하는 대로)
 
-    // 가장 많이 나온 알파벳을 찾기 위한 반복문
-    for (i = 0; i < 26; i++) {
-        if (max < alphabet[i]) {  // 현재 최대 빈도수보다 더 큰 빈도수를 찾으면
-            max = alphabet[i];  // 최대 빈도수 갱신
-            max_pos = i;  // 최대 빈도수를 가진 알파벳의 위치 저장
+        for (int j = 0; j < str1[i].length(); j++) {
+            // 두 문자열 간의 차이 계산 (알파벳 간 차이를 계산)
+            int diff = str2[i][j] - str1[i][j];
+
+            // 알파벳 순환 처리 (음수일 경우 26을 더해 순환)
+            if (diff < 0)
+                diff += 26;
+
+            // 결과 출력
+            cout << diff << " ";
         }
+        cout << endl;  // 각 테스트 케이스가 끝날 때 줄 바꿈
     }
 
-    // 빈도수가 가장 높은 알파벳의 대문자를 결과로 설정
-    result = static_cast<char>(max_pos + 'A');  // 'a' 대신 'A'로 변환하여 결과에 저장
-
-    // 동일한 빈도수를 가진 알파벳이 있는지 확인
-    for (i = 0; i < 26; i++) {
-        if (max == alphabet[i] && max_pos != i) {  // 동일한 빈도수의 알파벳이 다른 곳에 있으면
-            result = '?';  // 결과를 '?'로 설정
-        }
-    }
-
-    // 결과 출력
-    cout << result;
+    // 동적으로 할당한 메모리 해제
+    delete[] str1;
+    delete[] str2;
 
     return 0;
 }
