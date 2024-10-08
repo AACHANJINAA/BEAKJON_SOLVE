@@ -1,28 +1,19 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 int main() {
-	int size;
-	cin >> size;
-	cin.ignore();
-	string* s = new string[size];
-	int i;
+	string s;
+	cin >> s;
+	int cnt = 0;
 
-	for (i = 0; i < size; i++) {
-		getline(cin, s[i]);
+	for (int i = 0; i < s.length(); i++) {
+		if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i'
+			|| s[i] == 'o' || s[i] == 'u') {
+			cnt++;
+		}
 	}
 
-	for (i = 0; i < size; i++) {
-		if (s[i][0] - 97 >= 0)
-			s[i][0] -= 32;
-	}
-
-	for (i = 0; i < size; i++) {
-		cout << s[i] << endl;
-	}
-
-	delete[] s;
+	cout << cnt << endl;
 
 	return 0;
 }
