@@ -1,45 +1,33 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
 using namespace std;
 
 int main() {
     int size, i, j;
-    cin >> size;   // 테스트 케이스의 개수를 입력받음
+    cin >> size;  // 테스트 케이스 개수 입력받음
+    int* miss_pos = new int[size];   // 잘못된 문자의 위치를 저장할 배열
+    string* str = new string[size];  // 문자열을 저장할 배열
 
-    // 2차원 배열을 동적으로 할당 (각 테스트 케이스마다 두 개의 정수 입력받기 위해)
-    int** test_case = new int* [size];
+    // 각 테스트 케이스의 잘못된 문자 위치와 문자열 입력
     for (i = 0; i < size; i++) {
-        test_case[i] = new int[2];   // 각 테스트 케이스마다 2개의 정수 배열 할당 (범위 시작과 끝)
+        cin >> miss_pos[i] >> str[i];  // miss_pos는 잘못된 문자 위치, str은 문자열
     }
-
-    // 각 테스트 케이스의 범위 입력
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < 2; j++) {
-            cin >> test_case[i][j];   // 테스트 케이스의 두 값을 입력받음 (범위 시작값, 끝값)
-        }
-    }
-
-    string zero_str;   // 숫자를 문자열로 저장할 변수
 
     // 각 테스트 케이스에 대해 처리
     for (i = 0; i < size; i++) {
-        // test_case[i][0]에서 test_case[i][1]까지의 숫자를 문자열로 변환하여 zero_str에 저장
-        for (j = test_case[i][0]; j <= test_case[i][1]; j++) {
-            zero_str += to_string(j);   // 숫자를 문자열로 변환해 zero_str에 추가
+        // 각 문자열의 문자들을 확인하면서 잘못된 위치의 문자는 출력하지 않음
+        for (j = 0; j < str[i].length(); j++) {
+            if (j != miss_pos[i] - 1) {  // 잘못된 문자 위치는 1-based index이므로 0-based로 맞추기 위해 -1
+                cout << str[i][j];  // 잘못된 위치가 아닌 문자만 출력
+            }
         }
-
-        // zero_str에서 '0'의 개수를 세고 출력
-        cout << count(zero_str.begin(), zero_str.end(), '0') << endl;
-
-        // 다음 테스트 케이스를 위해 zero_str을 초기화
-        zero_str = {};
+        // 마지막 테스트 케이스가 아니라면 줄바꿈 추가
+        if (i != size - 1)
+            cout << endl;  // 각 케이스 출력 후 줄바꿈
     }
 
-    // 동적으로 할당한 메모리 해제
-    for (i = 0; i < size; i++)
-        delete[] test_case[i];   // 각 테스트 케이스에 할당된 메모리 해제
-    delete[] test_case;          // test_case 자체에 할당된 메모리 해제
+    // 동적으로 할당한 배열 해제
+    delete[] miss_pos;
+    delete[] str;
 
     return 0;
 }
