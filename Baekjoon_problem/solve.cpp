@@ -1,33 +1,31 @@
 #include <iostream>
+#include <vector>
+#include <cmath>
+
 using namespace std;
 
 int main() {
-    int size, i, j;
-    cin >> size;  // 테스트 케이스 개수 입력받음
-    int* miss_pos = new int[size];   // 잘못된 문자의 위치를 저장할 배열
-    string* str = new string[size];  // 문자열을 저장할 배열
+    string v1, v2;
 
-    // 각 테스트 케이스의 잘못된 문자 위치와 문자열 입력
-    for (i = 0; i < size; i++) {
-        cin >> miss_pos[i] >> str[i];  // miss_pos는 잘못된 문자 위치, str은 문자열
+    cin >> v1 >> v2;
+
+    int freqA[2][26]{};
+
+    int i, j, result = 0;
+
+    for (i = 0; i < v1.length(); i++) {
+        freqA[0][v1[i] - 'a']++;
     }
 
-    // 각 테스트 케이스에 대해 처리
-    for (i = 0; i < size; i++) {
-        // 각 문자열의 문자들을 확인하면서 잘못된 위치의 문자는 출력하지 않음
-        for (j = 0; j < str[i].length(); j++) {
-            if (j != miss_pos[i] - 1) {  // 잘못된 문자 위치는 1-based index이므로 0-based로 맞추기 위해 -1
-                cout << str[i][j];  // 잘못된 위치가 아닌 문자만 출력
-            }
+    for (i = 0; i < v2.length(); i++) {
+        freqA[1][v2[i] - 'a']++;
+    }
+
+    for (i = 0; i < 26; i++) {
+        if (freqA[0][i] > 0 || freqA[1][i] > 0) {
+            result += abs(freqA[0][i] - freqA[1][i]);
         }
-        // 마지막 테스트 케이스가 아니라면 줄바꿈 추가
-        if (i != size - 1)
-            cout << endl;  // 각 케이스 출력 후 줄바꿈
     }
 
-    // 동적으로 할당한 배열 해제
-    delete[] miss_pos;
-    delete[] str;
-
-    return 0;
+    cout << result;
 }
