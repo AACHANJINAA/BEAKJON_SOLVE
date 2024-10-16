@@ -1,31 +1,77 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
-
 using namespace std;
 
+class STACK {
+private:
+    int t;
+public:
+    int data[10000]{};
+    STACK() { t = -1; };
+    void push(int x);
+    int pop();
+    int size();
+    int empty();
+    int top();
+};
+
 int main() {
-    string v1, v2;
+    int size;
+    cin >> size;
+    STACK S;
 
-    cin >> v1 >> v2;
-
-    int freqA[2][26]{};
-
-    int i, j, result = 0;
-
-    for (i = 0; i < v1.length(); i++) {
-        freqA[0][v1[i] - 'a']++;
-    }
-
-    for (i = 0; i < v2.length(); i++) {
-        freqA[1][v2[i] - 'a']++;
-    }
-
-    for (i = 0; i < 26; i++) {
-        if (freqA[0][i] > 0 || freqA[1][i] > 0) {
-            result += abs(freqA[0][i] - freqA[1][i]);
+    for (int i = 0; i < size; i++) {
+        string command;
+        cin >> command;
+        if (command == "push") {
+            int n;
+            cin >> n;
+            S.push(n);
+        }
+        else if (command == "pop") {
+            cout << S.pop() << endl;
+        }
+        else if (command == "size") {
+            cout << S.size() << endl;
+        }
+        else if (command == "empty") {
+            cout << S.empty() << endl;
+        }
+        else if (command == "top") {
+            cout << S.top() << endl;
         }
     }
 
-    cout << result;
+    return 0;
+}
+
+void STACK::push(int x) {
+    t++;
+    data[t] = x;
+}
+int STACK::pop() {
+    if (empty() == 1) {
+        return -1;
+    }
+    else {
+        return data[t--];
+    }
+}
+int STACK::size() {
+    return t + 1;
+}
+int STACK::empty() {
+    if (t == -1) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+int STACK::top() {
+    if (empty() == 1) {
+        return -1;
+    }
+    else {
+        return data[t];
+    }
 }
