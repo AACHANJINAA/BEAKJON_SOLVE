@@ -1,27 +1,36 @@
 #include <iostream>
-#include <cmath>
+#include <vector>
 using namespace std;
 
 int main() {
-	int m, n;
-	int small_num = -1, sum = 0;
-	cin >> m >> n;
+	int test_case;
+	cin >> test_case;
+	vector<string> result_name(test_case);
+	vector<int> result_price(test_case);
 
-	for (int i = m; i <= m + (n - m); i++) {
-		int k = sqrt(i);
-		if (k * k == i) {
-			if (small_num == -1) {
-				small_num = i;
+	for (int i = 0; i < test_case; i++) {
+		int p;
+		cin >> p;
+		vector<string> name(p);
+		vector<int> price(p);
+		for (int j = 0; j < p; j++) {
+			cin >> price[j];
+			cin >> name[j];
+
+			if (i == 0) {
+				result_name[i] = name[j];
+				result_price[i] = price[j];
 			}
-			else if (small_num > i) {
-				small_num = i;
+			else {
+				if (result_price[i] < price[j]) {
+					result_name[i] = name[j];
+					result_price[i] = price[j];
+				}
 			}
-			sum += i;
 		}
 	}
 
-	if (small_num != -1)
-		cout << sum << endl << small_num;
-	else
-		cout << small_num;
+	for (int i = 0; i < test_case; i++) {
+		cout << result_name[i] << endl;
+	}
 }
