@@ -3,17 +3,11 @@
 using namespace std;
 
 int main() {
-	int N;
-	cin >> N;
-	vector<int> computer(N);
+	vector<int> game(5);
 	int result = 0;
 
-	for (int i = 0; i < N; i++) {
-		cin >> computer[i];
-		result += computer[i];
-	}
-	
-	result -= N - 1;
+	for (int i = 0; i < 5; i++)
+		result += game[i];
 
 	cout << result;
 
