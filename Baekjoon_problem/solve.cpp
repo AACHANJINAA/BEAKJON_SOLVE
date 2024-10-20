@@ -1,27 +1,23 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-int fibonaci(int x) {
-	int result = 0;
-	if (x == 0)
-		result = 0;
-	else if (x == 1)
-		result = 1;
-	
-	int n1 = 1, n2 = 0;
-	if (x > 1) {
-		for (int i = 2; i < x + 1; i++) {
-			result = n1 + n2;
-			n2 = n1;
-			n1 = result;
+int main() {
+	vector<int> a, b;
+
+	while(true) {
+		int n, k;
+		cin >> n >> k;
+		if (n == 0 && k == 0) {
+			break;
+		}
+		else {
+			a.push_back(n);
+			b.push_back(k);
 		}
 	}
 
-	return result;
-}
-
-int main() {
-	int n;
-	cin >> n;
-	cout << fibonaci(n);
+	for (int i = 0; i < size(a); i++) {
+		cout << a[i] + b[i];
+	}
 }
