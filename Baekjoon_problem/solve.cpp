@@ -3,18 +3,17 @@
 using namespace std;
 
 int main() {
-	int N, X, i;
-	cin >> N >> X;
-	vector<int> num(N), result;
+	int size, i;
+	cin >> size;
+	vector<int> vertex(size), edge(size), result(size);
 
-	for (i = 0; i < N; i++) {
-		cin >> num[i];
-		if (num[i] < X)
-			result.push_back(num[i]);
+	for (i = 0; i < size; i++) {
+		cin >> vertex[i] >> edge[i];
+		result[i] = 2 - vertex[i] + edge[i];
 	}
 
-	for (i = 0; i < result.size(); i++) {
-		cout << result[i] << ' ';
+	for (i = 0; i < size; i++) {
+		cout << result[i] << endl;
 	}
 
 	return 0;
