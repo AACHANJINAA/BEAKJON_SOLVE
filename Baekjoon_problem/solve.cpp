@@ -1,18 +1,21 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
-	int n;
-	cin >> n;
-	int result = 1;
+	int N, X, i;
+	cin >> N >> X;
+	vector<int> num(N), result;
 
-	if (n != 0){
-		for (int i = 1; i <= n; i++) {
-			result *= i;
-		}
+	for (i = 0; i < N; i++) {
+		cin >> num[i];
+		if (num[i] < X)
+			result.push_back(num[i]);
 	}
 
-	cout << result;
+	for (i = 0; i < result.size(); i++) {
+		cout << result[i] << ' ';
+	}
 
 	return 0;
 }
