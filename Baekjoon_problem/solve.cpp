@@ -1,21 +1,18 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
-	int N, i;
-	cin >> N;
-	vector<int> first_dice(N);
-	vector<int> second_dice(N);
+	int n;
+	cin >> n;
+	int result = 1;
 
-	for (i = 0; i < N; i++) {
-		cin >> first_dice[i] >> second_dice[i];
+	if (n != 0){
+		for (int i = 1; i <= n; i++) {
+			result *= i;
+		}
 	}
 
-	for (i = 0; i < N; i++) {
-		cout << "Case " << i << ": " << first_dice[i] + second_dice[i] << endl;
-
-	}
+	cout << result;
 
 	return 0;
 }
