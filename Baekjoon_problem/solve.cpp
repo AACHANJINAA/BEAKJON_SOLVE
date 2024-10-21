@@ -3,18 +3,28 @@
 using namespace std;
 
 int main() {
-	int size, i;
+	int size;
 	cin >> size;
-	vector<int> vertex(size), edge(size), result(size);
-
+	vector<int> n(size);
+	int result = 0, i, j;
+	
 	for (i = 0; i < size; i++) {
-		cin >> vertex[i] >> edge[i];
-		result[i] = 2 - vertex[i] + edge[i];
+		cin >> n[i];
+
+		if (n[i] > 1) {
+			int cnt = 0;
+			for (j = 2; j < n[i]; j++) {
+				if (n[i] % j == 0) {
+					cnt++;
+				}
+			}
+			if (cnt == 0)
+				result++;
+		}
 	}
 
-	for (i = 0; i < size; i++) {
-		cout << result[i] << endl;
-	}
-
+	for (i = 0; i < result; i++)
+		cout << result;
+	
 	return 0;
 }
