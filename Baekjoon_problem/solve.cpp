@@ -1,14 +1,21 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
-	int n, num[5]{};
-	cin >> n;
-	int i = 0, cnt = 0;
-	for (i = 0; i < 5; i++) {
-		cin >> num[i];
-		if (n == num[i])
-			cnt++;
+	int tc;
+	cin >> tc;
+	vector<int> p(tc);
+	int result = 0, sequence = 0;
+	for (int i = 0; i < tc; i++) {
+		cin >> p[i];
+		if (p[i] == 1) {
+			sequence++;
+			result += sequence;
+		}
+		else {
+			sequence = 0;
+		}
 	}
-	cout << cnt;
+	cout << result;
 }
