@@ -1,22 +1,27 @@
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
-int main() {
-    int arr[9]{}, i, j;
-    for (i = 0; i < 9; i++) {
-        cin >> arr[i];
-    }
-    int big_num = -1;
-    for (i = 0; i < 9; i++) {
-        if (big_num < arr[i])
-            big_num = arr[i];
+int fibonacci(int n) {
+    if (n == 0)
+        return 0;
+    else if (n == 1)
+        return 1;
+    else {
+        int result = 0, n1 = 0, n2 = 1;
+        for (int i = 2; i <= n; i++) {
+            result = n1 + n2;
+            n1 = n2;
+            n2 = result;
+        }
+        return result;
     }
 
-    for (i = 0; i < 9; i++) {
-        if (big_num == arr[i]) {
-            cout << big_num << '\n' << i;
-        }
-    }
+    return -1;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << fibonacci(n);
     return 0;
 }
