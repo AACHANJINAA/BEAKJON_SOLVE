@@ -1,23 +1,37 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
-	int tc;
-	cin >> tc;
-	vector<int> n(tc);
-	vector<vector<int>> num(tc);
-	vector<int> sum(tc);
+	int arr[3][4]{};
+	int result[3]{};
 	int i, j;
-	for (i = 0; i < tc; i++) {
-		cin >> n[i];
-		num[i].resize(n[i]);
-		for (j = 0; j < n[i]; j++) {
-			cin >> num[i][j];
-			sum[i] += num[i][j];
+	for (i = 0; i < 3; i++){
+		for (j = 0; j < 4; j++) {
+			cin >> arr[i][j];
+			result[i] += arr[i][j];
 		}
 	}
 
-	for (i = 0; i < tc; i++)
-		cout << sum[i] << endl;
+	for (i = 0; i < 3; i++) {
+		switch(result[i])
+		{
+		case 0:
+			cout << 'D' << endl;
+			break;
+		case 1:
+			cout << 'C' << endl;
+			break;
+		case 2:
+			cout << 'B' << endl;
+			break;
+		case 3:
+			cout << 'A' << endl;
+			break;
+		case 4:
+			cout << 'E' << endl;
+			break;
+		default:
+			break;
+		}
+	}
 }
