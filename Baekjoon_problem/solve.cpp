@@ -1,21 +1,21 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int main() {
 	int tc;
 	cin >> tc;
-	vector<int> p(tc);
-	int result = 0, sequence = 0;
-	for (int i = 0; i < tc; i++) {
-		cin >> p[i];
-		if (p[i] == 1) {
-			sequence++;
-			result += sequence;
-		}
-		else {
-			sequence = 0;
-		}
+	vector<double> subject(tc);
+	double avr = 0.0;
+	int i;
+	for (i = 0; i < tc; i++) {
+		cin >> subject[i];
 	}
-	cout << result;
+	sort(subject.begin(), subject.end(), greater<>());
+	for (i = 0; i < tc; i++) {
+		avr += subject[i] / subject[0] * 100;
+	}
+	cout << fixed;
+	cout << avr / double(tc);
 }
