@@ -1,24 +1,22 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
 using namespace std;
 
 int main() {
-    int N, K;
-    cin >> N >> K;
-    vector<int> divisor;
-    for (int i = 1; i <= N; i++) {
-        if (N % i == 0)
-            divisor.push_back(i);
+    int arr[9]{}, i, j;
+    for (i = 0; i < 9; i++) {
+        cin >> arr[i];
+    }
+    int big_num = -1;
+    for (i = 0; i < 9; i++) {
+        if (big_num < arr[i])
+            big_num = arr[i];
     }
 
-    if (divisor.size() >= K) {
-        sort(divisor.begin(), divisor.end(), less<>());
-        cout << divisor[K - 1];
+    for (i = 0; i < 9; i++) {
+        if (big_num == arr[i]) {
+            cout << big_num << '\n' << i;
+        }
     }
-    else {
-        cout << 0;
-    }
-    
     return 0;
 }
