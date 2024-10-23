@@ -1,21 +1,20 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
 int main() {
-	int tc;
-	cin >> tc;
-	vector<double> subject(tc);
-	double avr = 0.0;
-	int i;
-	for (i = 0; i < tc; i++) {
-		cin >> subject[i];
+	int a[4][2];
+	int i, j;
+	int human_num = 0, many_people = -1;
+	for (i = 0; i < 4; i++) {
+		for (j = 0; j < 2; j++) {
+			cin >> a[i][j];
+			if(j == 0)
+				human_num -= a[i][j];
+			else if(j == 1)
+				human_num += a[i][j];
+		}
+		if (human_num > many_people)
+			many_people = human_num;
 	}
-	sort(subject.begin(), subject.end(), greater<>());
-	for (i = 0; i < tc; i++) {
-		avr += subject[i] / subject[0] * 100;
-	}
-	cout << fixed;
-	cout << avr / double(tc);
+	cout << many_people;
 }
