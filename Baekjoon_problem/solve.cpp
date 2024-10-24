@@ -1,19 +1,51 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
+string DayOfWeek(int day, int month, int year) {
+	if (month == 1 || month == 2) {
+		month += 12;
+		year -= 1;
+	}
+
+	int two_lower = year % 100;
+	int two_higher = year / 100;
+
+	int DOW = (day + (13 * (month + 1)) / 
+		      5 + two_lower + (two_lower / 4) +
+			  (two_higher / 4) + (two_higher * 5)) % 7;
+
+	switch (DOW)
+	{
+	case 0:
+		return "SAT";
+		break;
+	case 1:
+		return "SUN";
+		break;
+	case 2:
+		return "MON";
+		break;
+	case 3:
+		return "TUE";
+		break;
+	case 4:
+		return "WED";
+		break;
+	case 5:
+		return "THU";
+		break;
+	case 6:
+		return "FRI";
+		break;
+	default:
+		break;
+	}
+}
+
 int main() {
-	int tc, i;
-	cin >> tc;
-	vector<pair<int, int>> xy(tc);
-	for (i = 0; i < tc; i++) 
-		cin >> xy[i].second >> xy[i].first;
+	int x, y;
+	cin >> x >> y;
 
-	sort(xy.begin(), xy.end());
-
-	for (i = 0; i < tc; i++)
-		cout << xy[i].second << ' ' << xy[i].first << '\n';
-
+	cout << DayOfWeek(y, x, 2007);
 	return 0;
 }
