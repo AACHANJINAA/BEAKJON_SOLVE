@@ -11,16 +11,9 @@ void push(vector<int>& data, int x) {
 }
 void pop(vector<int>& data) {
 	if (!data.empty()) {
-		cout << data[cnt - 1] << endl;
-		data.pop_back();
+		cout << data[0] << endl;
+		data.erase(data.begin());
 		cnt--;
-	}
-	else
-		cout << -1 << endl;
-}
-void top(vector<int>& data){
-	if (!data.empty()) {
-		cout << data[cnt - 1] << endl;
 	}
 	else
 		cout << -1 << endl;
@@ -33,10 +26,11 @@ int main() {
 	vector<int> data;
 	int i;
 
-	for (i = 0; i < 14; i++) {
+
+	for (i = 0; i < tc; i++) {
 		cin >> input[i];
 		if (input[i] == "push") {
-			int x;
+			int x; 
 			cin >> x;
 			push(data, x);
 		}
@@ -47,13 +41,28 @@ int main() {
 			cout << data.size() << endl;
 		}
 		else if (input[i] == "empty") {
-			if (data.empty())
+			if (data.empty()) {
 				cout << 1 << endl;
-			else
+			}
+			else {
 				cout << 0 << endl;
+			}
 		}
-		else if (input[i] == "top") {
-			top(data);
+		else if (input[i] == "front") {
+			if (!data.empty()) {
+				cout << data.front() << endl;
+			}
+			else {
+				cout << -1 << endl;
+			}
+		}
+		else if (input[i] == "back") {
+			if (!data.empty()) {
+				cout << data.back() << endl;
+			}
+			else {
+				cout << -1 << endl;
+			}
 		}
 	}
 
