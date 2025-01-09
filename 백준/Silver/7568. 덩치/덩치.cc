@@ -2,29 +2,24 @@
 #include <vector>
 using namespace std;
 
-int main() {	
+int main() {
 	int tc;
 	cin >> tc;
-	vector<pair<int, int>> body(tc);
+
+	vector<pair<int, int>> m(tc);
 	for (int i = 0; i < tc; i++) {
-		cin >> body[i].first >> body[i].second;
+		cin >> m[i].first >> m[i].second;
 	}
 
-	vector<int> level(tc, 1);
+	vector<int> result(tc, 1);
 
 	for (int i = 0; i < tc; i++) {
 		for (int j = 0; j < tc; j++) {
-			if (i != j &&
-				body[i].first < body[j].first &&
-				body[i].second < body[j].second)
-				level[i]++;
+			if (m[i].first < m[j].first && m[i].second < m[j].second)
+				result[i]++;
 		}
 	}
 
-	for (const auto& pr : level) {
+	for (const int& pr : result)
 		cout << pr << ' ';
-	}
-	cout << endl;
-
-	return 0;
 }
