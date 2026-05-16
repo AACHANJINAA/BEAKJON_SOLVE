@@ -4,8 +4,6 @@
 
 using namespace std;
 
-// map으로 다시 풀어보기
-
 struct ALBUM
 {
     string topic;
