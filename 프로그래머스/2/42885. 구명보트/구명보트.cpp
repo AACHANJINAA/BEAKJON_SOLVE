@@ -1,24 +1,24 @@
 #include <string>
-#include <iostream>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
 int solution(vector<int> people, int limit) {
-    int answer = 0;
+    // 최대 2명 + 무게제한
+    int ans = 0;
+    
     sort(people.begin(), people.end());
     
-    int min = 0;
-    for (int i = people.size() - 1; i >= min; --i)
+    int left = 0;
+    int right = people.size() - 1;
+    
+    while(left <= right)
     {
-        if (people[i] + people[min] <= limit)
-        {
-            answer++;
-            min++;
-        }
-        else answer++;
+        if(people[left] + people[right] <= limit) left++;
+        right--;
+        ans++;
     }
-	
-    return answer;
+    
+    return ans;
 }
