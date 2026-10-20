@@ -1,24 +1,22 @@
 #include <string>
 #include <vector>
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
-vector<int> solution(vector<int> arr, vector<vector<int>> cmd) {
-    vector<int> ans;
-    for(const auto& c : cmd)
+vector<int> solution(vector<int> array, vector<vector<int>> commands) {
+    vector<int> answer;
+    answer.reserve(commands.size());
+    
+    for(const auto& c : commands)
     {
-        int begin = c[0] - 1;
-        int end = c[1]; // end는 제외되서 정렬되기 때문
-        int find = c[2] - 1;
+        vector<int> temp = array;
+        sort(temp.begin() + c[0] - 1, temp.begin() + c[1]);
         
-        vector<int> temp_arr(arr);
-        
-        sort(temp_arr.begin() + begin, temp_arr.begin() + end);
-        
-        ans.push_back(temp_arr[begin + find]);
+        answer.emplace_back(temp[c[2] + c[0] - 2]);
     }
     
-    return ans;
+    
+    return answer;
 }
