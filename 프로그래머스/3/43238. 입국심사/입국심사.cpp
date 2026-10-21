@@ -4,41 +4,30 @@
 
 using namespace std;
 
-// 최댓값을 찾을땐 check 성공 시 start, 최솟값을 찾을 때는 end
-
-bool check(long long mid, int n, const vector<int>& times)
-{
-    long long total = 0;
-	for (const auto& num : times)
-	{
-        total += mid / num;
-	}
-
-    return total >= n;
-}
-
-
 long long solution(int n, vector<int> times) {
     long long answer = 0;
-
-    long long start = 0;
-    long long max_time = *max_element(times.begin(), times.end());
-    long long end = max_time * n;
-    long long mid = 0;
-    while (start <= end)
+    
+    sort(times.begin(), times.end());
+    
+    long long start = 1; 
+    long long end = (long long)times.back() * n;
+    
+    while(start <= end)
     {
-	    mid = (start + end) / 2;
-
-        if (check(mid, n, times))
-        {
-            answer = mid;
-            end = mid - 1;
+        long long mid = (start + end) / 2;
+        long long total = 0; // mid 시간 동안 심사할 수 있는 총 인원
+        
+        for (int t : times) {
+            total += mid / t;
         }
-        else
-        {
-            start = mid + 1;
+        
+        if (total >= n) {
+            answer = mid;       // 조건 충족 시 정답 후보 기록
+            end = mid - 1;      // 더 적은 시간도 가능한지 왼쪽 범위 탐색
+        } else {
+            start = mid + 1;    // 시간이 부족하므로 오른쪽 범위 탐색
         }
     }
-
+    
     return answer;
 }
